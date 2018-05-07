@@ -1,24 +1,22 @@
 class Level3
-  def self.solve
-    lambda do |level_case|
-      level_case.images.reject! { |image| image.matrix.zero? }
-      level_case.images.each { |image| image.matrix.compact.binary }
+  def self.solve(level_case)
+    level_case.images.reject! { |image| image.matrix.zero? }
+    level_case.images.each { |image| image.matrix.compact.binary }
 
-      appears = {}
-      level_case.images.each do |image|
-        key = image.matrix.to_a
-        appears[key] ||= []
-        appears[key] << image.timestamp
-      end
-
-      output = []
-
-      appears.values.map do |timestamps|
-        output << find_sequence(timestamps)
-      end
-
-      output.flatten(1).sort.map! { |arr| [arr[0], arr[-1], arr.count].join(' ') }
+    appears = {}
+    level_case.images.each do |image|
+      key = image.matrix.to_a
+      appears[key] ||= []
+      appears[key] << image.timestamp
     end
+
+    output = []
+
+    appears.values.map do |timestamps|
+      output << find_sequence(timestamps)
+    end
+
+    output.flatten(1).sort.map! { |arr| [arr[0], arr[-1], arr.count].join(' ') }
   end
 
   def self.find_sequence(arr)

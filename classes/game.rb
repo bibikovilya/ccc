@@ -31,7 +31,7 @@ class Game
   def solve
     map_all do |level, i|
       output = File.open(output_filepath(level: level, number: i), 'w')
-      output.puts(Kernel.const_get("Level#{level}").solve.call(cases[level][i]))
+      output.puts(Kernel.const_get("Level#{level}").solve(cases[level][i]))
       output.close
     end
   end
